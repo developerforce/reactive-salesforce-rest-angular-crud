@@ -1,0 +1,21 @@
+@(remote: Boolean, oathCallbackUrl: String)
+
+@main("OAUTH Setup Required") {
+
+    <h2>You need to setup OAUTH.</h2>
+
+    Step 1a) <a href="https://login.salesforce.com/app/mgmt/forceconnectedapps/forceAppEdit.apexp">Create a new Connected App on Salesforce</a><br/>
+    Step 1b) Fill in the <em>Connected App Name</em>, <em>API Name</em>, and <em>Contact Email</em> fields.<br/>
+    Step 1c) Select <em>Enable OAuth Settings</em> and enter the following <em>Callback URL</em>: <code>@oathCallbackUrl</code><br/>
+    Step 1d) Select the necessary scopes and <em>Save</em> the Connected App<br/>
+        <br/>
+    @if(remote) {
+        Step 2) Set the Heroku config for your newly created <em>Consumer Key</em> and <em>Consumer Secret</em> values using the <code>SALESFORCE_CONSUMER_KEY</code> and <code>SALESFORCE_CONSUMER_SECRET</code> key names.
+    } else {
+        Step 2) Create a new <code>conf/local.conf</code> file containing the following with your newly created <em>Consumer Key</em> and <em>Consumer Secret</em> values:
+        <pre><code># DO NOT SHARE THIS FILE OR PUT IT INTO YOUR SCM
+salesforce.oauth.consumer-key="YOUR_CONSUMER_KEY"
+salesforce.oauth.consumer-secret="YOUR_CONSUMER_SECRET"</code></pre><br/>
+    }
+
+}

@@ -1,0 +1,37 @@
+@()
+
+@main("Salesforce Contacts") {
+
+    <div ng-app="ngApp" ng-controller="Contacts" ng-show="initialized" class="row">
+        <a href="@routes.Secured.login()" ng-show="!loggedIn" class="btn btn-default">Login to Salesforce</a>
+
+        <div class="col-md-6">
+            <div class="gridStyle" ng-show="loggedIn" ng-grid="gridOptions"></div>
+            <button class="btn btn-info newButton" ng-click="newContact()">New Contact</button>
+        </div>
+
+        <div class="col-md-6">
+            <form ng-show="selectedContact" ng-submit="saveContact()">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" ng-model="selectedContact.FirstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" ng-model="selectedContact.LastName" required>
+                </div>
+                <button type="submit" class="btn btn-default">Save</button>
+                <button  type="button" class="btn btn-danger" ng-click="deleteContact()" ng-show="selectedContact.Id">Delete</button>
+            </form>
+            <span ng-show="!selectedContact" class="label label-success">{{message}}</span>
+        </div>
+
+    </div>
+
+    <script src="@routes.Assets.at("lib/jquery/jquery.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("lib/angularjs/angular.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("lib/ng-grid/ng-grid.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("lib/angularjs/angular-resource.min.js")" type="text/javascript"></script>
+    <script src="@routes.Assets.at("javascripts/index.js")" type="text/javascript"></script>
+
+}

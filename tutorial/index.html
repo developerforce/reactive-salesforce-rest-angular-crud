@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>Reactive Salesforce REST Example</title>
+</head>
+<body>
+<div>
+    <h2>Running the App</h2>
+
+    <p>
+        You can either run this app via the command line with <code>activator ~run</code> or from the Activator UI.  Once the app is running open <a href="http://localhost:9000" target="_blank">localhost:9000</a> in your browser.  You should then see instructions for setting up OAUTH.  After setting up OAUTH you should be able to login with your Salesforce account and then see your Contacts.
+    </p>
+</div>
+<div>
+    <h2>The REST Server</h2>
+
+    <p>
+        The <a href="#code/conf/routes" class="shortcut">conf/routes</a> file defines all of the HTTP endpoints the Play Framework server handles.  The REST service that fetches the Salesforce Contacts and returns them as JSON is defined as:
+        <pre><code>GET    /contacts    controllers.Application.getContacts()</code></pre>
+        An HTTP <code>GET</code> request to <code>/contacts</code> invokes the <code>getContacts</code> method in the <a href="#code/app/controllers/Application.java" class="shortcut">controllers.Application</a> controller.
+    </p>
+
+    <p>
+        The <code>getContacts</code> controller method is protected to users authenticated to Salesforce using the <a href="#code/app/controllers/Secured.java" class="shortcut">controllers.Secured</a> controller.  Once the user is authenticated the <code>query</code> method of the <a href="#code/app/controllers/SalesforceAPI.java" class="shortcut">SalesforceAPI</a> utility class makes the query for contacts and returns them.  This REST call is async &amp; non-blocking (e.g. Reactive).
+    </p>
+</div>
+<div>
+    <h2>The Web UI</h2>
+
+    <p>
+        Requests to <code>/</code> are handled by the <code>index</code> method in the <a href="#code/app/controllers/Application.java" class="shortcut">controllers.Application</a> controller.  If the OAUTH configuration has not been set then the setup instructions are displayed using the <a href="#code/app/views/setup.scala.html" class="shortcut">setup.scala.html</a> template.  Otherwise the <a href="#code/app/views/index.scala.html" class="shortcut">index.scala.html</a> template is rendered.
+    </p>
+
+    <p>
+        The <code>index</code> template loads the <a href="#code/app/assets/javascripts/index.js" class="shortcut">index.js</a> file initializes AngularJS.  The AngularJS app tries to call the <a href="http://localhost:9000/contacts" target="_blank">localhost:9000/contacts</a> REST service.  If the request fails then the <em>Login with Salesforce</em> button is displayed, otherwise the Contacts are retrieved and rendered on the page.
+    </p>
+
+    <p>
+        The base HTML page is defined in the <a href="#code/app/views/main.scala.html" class="shortcut">main.scala.html</a> template.  This loads AngularJS and Bootstrap via the WebJars defined as dependencies in the <a href="#code/build.sbt" class="shortcut">build.sbt</a> file.
+    </p>
+</div>
+</body>
+</html>
