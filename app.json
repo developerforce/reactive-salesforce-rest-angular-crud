@@ -1,9 +1,9 @@
 {
-  "name": "Reactive Salesforce REST Example",
+  "name": "Reactive Salesforce + Angular",
   "description": "An example Reactive Salesforce app that uses Play Framework, Java, and AngularJS for the UI.",
   "keywords": ["reactive", "playframework", "salesforce", "javascript", "rest", "angularjs"],
   "website": "https://developer.salesforce.com",
-  "repository": "https://github.com/developerforce/activator-reactive-salesforce",
+  "repository": "https://github.com/developerforce/reactive-salesforce-rest-angular-crud",
   "logo": "https://pbs.twimg.com/profile_images/462384100494438400/CRyX_n9b.png",
   "success_url": "/",
   "env": {
