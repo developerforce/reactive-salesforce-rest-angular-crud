@@ -30,7 +30,7 @@ public class Application extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static F.Promise<Result> getContact(String id) {
-        return F.Promise.pure(new Todo());
+        return F.Promise.pure((Result)new Todo());
     }
 
     @Security.Authenticated(Secured.class)
@@ -46,7 +46,7 @@ public class Application extends Controller {
 
     @Security.Authenticated(Secured.class)
     public static F.Promise<Result> updateContact(String id) {
-        ObjectNode json = (ObjectNode) request().body().asJson();
+        final ObjectNode json = (ObjectNode) request().body().asJson();
         JsonNode withoutId = json.deepCopy().without("Id");
         F.Promise<JsonNode> updateResult = SalesforceAPI.update(Secured.getToken(), Secured.getInstanceUrl(), "Contact", id, withoutId);
         return updateResult.map(new F.Function<JsonNode, Result>() {
