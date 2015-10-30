@@ -4,7 +4,7 @@ version := "1.0-SNAPSHOT"
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 
-scalaVersion := "2.11.1"
+scalaVersion := "2.11.7"
 
 libraryDependencies ++= Seq(
   javaJdbc,
@@ -16,3 +16,6 @@ libraryDependencies ++= Seq(
   "org.webjars" % "angularjs" % "1.2.20",
   "org.webjars" % "ng-grid" % "2.0.11-2"
 )
+
+
+fork in run := true
